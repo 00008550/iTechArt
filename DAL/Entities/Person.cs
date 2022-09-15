@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DAL.Entities
 {
@@ -14,6 +15,7 @@ namespace DAL.Entities
         public string PersonName { get; set; }
         [Name("Age")]
         public int Age { get; set; }
+        [XmlIgnore]
         public ICollection<Pet> Pets { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic.FileIO;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Xml.Serialization;
 
 namespace API.Controllers
 {
@@ -64,6 +65,24 @@ namespace API.Controllers
                 _context.SaveChanges();
             }
             return Ok(people);
-        } 
+        }
+        [HttpPost("ExportXml")]
+        public ActionResult ExportXml()
+        {
+
+            var list = _context.People.ToList();
+
+            var memory = new MemoryStream();
+            var writer = new StreamWriter(memory);
+            var serializer = new XmlSerializer(typeof(List<Person>));
+            serializer.Serialize(writer, list);
+            writer.Flush();
+
+            memory.Position = 0;
+            if (memory != Stream.Null)
+                return File(memory, "application/xml", $"Export_{DateTime.Now}.xml");
+
+            return NotFound();
+        }
     }
 }
