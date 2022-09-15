@@ -10,6 +10,5 @@ namespace DAL.Interfaces
     public interface IPersonRepository
     {
         Task<List<Person>> GetPeople();
-        List<Person> SavePeople(List<Person> people);
     }
 }

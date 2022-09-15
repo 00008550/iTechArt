@@ -19,15 +19,12 @@ namespace BLL.Services
 
         public async Task<List<Person>> LoadExcelFile(FileInfo file)
         {
-            List<Person> people = new();
-            
+            List<Person> people = new();      
             using var package = new ExcelPackage(file);
             await package.LoadAsync(file);
             var ws = package.Workbook.Worksheets[0];
             int row = 2;
             int col = 1;
-            
-
             while (string.IsNullOrWhiteSpace(ws.Cells[row,col].Value?.ToString())== false)
             {
                 List<Pet> pets = new();
@@ -47,16 +44,10 @@ namespace BLL.Services
                     colp += 2;
                     p.Pets = pets;
                 }
-
-                
-                
                 people.Add(p);
-
                 row += 1;
-
             }
             return people;
-
         }
         public async Task<List<Person>> LoadCsvFile(string path)
         {
@@ -73,12 +64,6 @@ namespace BLL.Services
                 var listRecords = records.ToList();
                 return listRecords;
             }
-
         }
-        //public async Task<XDocument[]> XmlDocument()
-        //{
-        //    int num = _context.People.Count();
-            
-        //}
     }
 }

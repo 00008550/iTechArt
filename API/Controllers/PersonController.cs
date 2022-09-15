@@ -17,7 +17,6 @@ namespace API.Controllers
     {
         PersonService personService = new PersonService();
         private readonly IPersonRepository _personRepository;
-        List<Person> _people = new List<Person>();
         private readonly DataContext _context;
         public PersonController(IPersonRepository personRepository, DataContext context)
         {
@@ -65,7 +64,6 @@ namespace API.Controllers
                 _context.SaveChanges();
             }
             return Ok(people);
-        }
-        
+        } 
     }
 }
